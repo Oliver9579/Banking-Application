@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @CrossOrigin
 @AllArgsConstructor
@@ -23,6 +25,11 @@ public class AccountController {
     @GetMapping("/{id}")
     public ResponseEntity<AccountDto> getAccountById(@PathVariable Long id) {
         return ResponseEntity.ok(accountService.getAccountById(id));
+    }
+
+    @PutMapping("/{id}/deposit")
+    public ResponseEntity<AccountDto> deposit(@PathVariable Long id, @RequestBody Map<String, Double> request) {
+        return ResponseEntity.ok(accountService.deposit(id, request.get("amount")));
     }
 
 }
